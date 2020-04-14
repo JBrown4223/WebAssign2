@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-8">
+        <h3>Add New Term</h3>
+  
+        <!-- Configure the submit button handler, and define the template reference variable -->
+        <form (ngSubmit)='onSubmit()' #f='ngForm'>
+  
+            <!-- Input, text -->
+            <div class="form-group">
+                <label class="control-label" for="name">Author name:</label>
+                <input type="text" class="form-control" id="authorName" name="authorName"
+                    [(ngModel)]="newDefinition.authorName"  #authorName="ngModel" minlength="5" maxlength="100" required
+                    autofocus>
+  
+                <!-- Validation  -->
+                <div *ngIf='authorName.invalid && (authorName.dirty || authorName.touched)' class='alert alert-danger'>
+                    <!-- The code below is situation-dependent - think before coding -->
+                    <div *ngIf='authorName.errors?.required'>Author is required! 5 - 100 characters</div>
+                    <div *ngIf='authorName.errors?.minlength'>Must be at least 5 characters</div>
+                </div>
+            </div>
+  
+  
+            <div class="form-group"><label class="control-label" for="name">Definition:</label>
+                <textarea class="form-control" id="definition" maxlength="5000" [(ngModel)]="newDefinition.definition"
+                    #definition="ngModel" minlength="10" name="definition" required="" rows="5"></textarea>
+  
+                <div *ngIf='definition.invalid && (definition.dirty || definition.touched)'
+                    class='alert alert-danger'>
+                    <!-- The code below is situation-dependent - think before coding -->
+                    <div *ngIf='definition.errors?.required'>Definition is required! 10 - 5000 characters</div>
+                    <div *ngIf='definition.errors?.minlength'>Definition is required! 10 - 5000 characters</div>
+                </div>
+            </div>
+  
+           
+  
+            <button class="btn btn-primary" type="submit" [disabled]="!f.form.valid">Add New Term</button>
+            &nbsp;&nbsp;
+        </form>
+    </div>
+  </div>
