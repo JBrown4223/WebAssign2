@@ -1,0 +1,85 @@
+<div class="container" *ngIf="term">    
+    <div class="row">
+  <h3>Details for {{term.wordNonEnglish}}</h3>
+  <p>&nbsp;</p>
+    </div>
+    <div class="col-md-10">
+        <dl class="dl-horizontal" *ngIf="term">
+            <dt>Definitions
+                <br *ngIf="term.definitions">({{ term.definitions.length }})<br>
+                <br>
+                <button class="btn btn-primary btn-sm" routerLink="/addDefinition/{{term._id}}">Add another</button>
+            </dt>
+            <dd *ngFor="let definition of term.definitions let i=index">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button class="btn btn-default btn-sm" (click)="like()">
+                            Like&nbsp;&nbsp;<span class="badge">{{ definition.likes }}</span>
+                        </button>
+                        &nbsp;&nbsp;Author: {{ definition.authorName|titlecase }} on {{ definition.dateCreated }}
+                    </div>
+                    <div class="panel-body">
+                        {{ definition.definition }}
+                    </div>
+                </div>
+            </dd>
+            <dt>Field of study</dt>
+            <dd><p>{{ term.fieldOfStudy|titlecase }}</p></dd>
+            <dt>Author name</dt>
+            <dd>
+                <p>{{ term.authorName|titlecase }}</p>
+            </dd>
+            <dt>Dates</dt>
+            <dd>
+                Created {{ term.dateCreated }}
+                <br>
+                Revised {{ term.dateRevised }}
+            </dd>
+            <br>
+            <dt>Translations</dt>
+            <dd>
+                <p>
+                    <span><a class="btn btn-primary btn-sm" routerLink="/addNonEnglishTerm/{{term._id}}">Add translation</a>&nbsp;&nbsp;</span>
+                    
+                </p>
+            </dd>
+            <div>
+                <dt>Media</dt>
+                <dd *ngIf="term.image">
+                    <p><img [src]="term.image"></p>
+                </dd>
+                <dd *ngIf="term.linkWikipedia">
+                    <p>
+                        <audio controls>
+                            <source [src]="term.audio" [type]="term.audioType">
+                            <source [src]="term.audio" type="audio/mpeg">
+                            Your browser does not support this audio element, or it wasn't configured properly.
+                        </audio>
+                    </p>
+                </dd>
+                <dt>Links</dt>
+                <dd>
+                    <p>
+                        <span *ngIf="term.linkAuthoritative"><a class="btn btn-default btn-sm" target="_blank" href="{{term.linkAuthoritative}}">Reference</a>&nbsp;&nbsp;</span>
+                        <span *ngIf="term.linkWikipedia"><a class="btn btn-default btn-sm" target="_blank" href="{{term.linkWikipedia}}">Wikipedia</a>&nbsp;&nbsp;</span>
+                        <span *ngIf="term.linkYouTube"><a class="btn btn-default btn-sm" target="_blank" href="{{term.linkYouTube}}">YouTube</a>&nbsp;&nbsp;</span>
+                    </p>
+                </dd>
+                <dt>Was this helpful?</dt>
+                <dd>
+                    <p>
+                        <button class="btn btn-default btn-sm" (click)="helpYes()">
+                            Yes&nbsp;&nbsp;<span class="badge">{{ term.helpYes }}</span>
+                        </button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-default btn-sm" (click)="helpNo()">
+                            No&nbsp;&nbsp;<span class="badge">{{ term.helpNo }}</span>
+                        </button>
+                        &nbsp;&nbsp;
+                    </p>
+                </dd>
+            </div>
+        </dl>
+    </div>
+
+</div>

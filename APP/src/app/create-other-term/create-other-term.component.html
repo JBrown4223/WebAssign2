@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <h3>Add Translation</h3>
+        <div class="col-md-8">
+            <!-- Configure the submit button handler, and define the template reference variable -->
+            <form class="form" (ngSubmit)='onSubmit()' #f="ngForm">
+                <label style="font-weight: bold;" [for]="languageCode">Language:</label><br>
+                <select class="form-control inputSize" id="languageCode" name="languageCode" (click)="setLanguage()" required
+                [(ngModel)]="currentLanguage" #languageCode='ngModel'>
+                  <option *ngFor="let l of LangArray let i=index" [value]="i">{{l.name}}</option>
+                </select>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="authorName">Author Name:</label><br>
+                <input class="form-control inputSize" id="authorName" name="authorName"  required
+                [(ngModel)]="existingWord.authorName" #authorName='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="fieldOfStudy">Field of Study:</label><br>
+                <input class="form-control inputSize" id="fieldOfStudy" name="fieldOfStudy"  required
+                [(ngModel)]="existingWord.fieldOfStudy" #fieldOfStudy='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="wordEnglish">Term or word in {{LangArray[currentLanguage].name}}:</label><br>
+                <input class="form-control inputSize" id="wordEnglish" name="wordEnglish" required
+                [(ngModel)]="existingWord.wordNonEnglish" #wordEnglish='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="wordExpanded">Expansion, if term or word (above) is an acronym or initialism:</label><br>
+                <input class="form-control inputSize" id="wordExpanded" name="wordExpanded" 
+                [(ngModel)]="existingWord.wordExpanded" #wordExpanded='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="definition">Definition:</label><br>
+                <textarea class="form-control inputSize definitionHeight" id="definition" name="definition" 
+                required [(ngModel)]="newWord.defString" #definition="ngModel"></textarea>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="image">Image</label><br>
+                <input class="form-control inputSize" id="image" name="image" [(ngModel)]="existingWord.image" #image='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="imageType">Image Type</label><br>
+                <input class="form-control inputSize" id="imageType" name="imageType" 
+                [(ngModel)]="existingWord.imageType" #imageType='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="audio">Audio</label><br>
+                <input class="form-control inputSize" id="audio" name="audio" 
+                [(ngModel)]="existingWord.audio" #audio='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="audioType">Audio Type</label><br>
+                <input class="form-control inputSize" id="audioType" name="audioType" 
+                [(ngModel)]="existingWord.audioType" #audioType='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="linkAuthoritative">Link (URL), Authoritative:</label><br>
+                <input class="form-control inputSize" id="linkAuthoritative" name="linkAuthoritative" 
+                [(ngModel)]="existingWord.linkAuthoritative" #linkAuthoritative='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="linkWikipedia">Link (URL), Wikipedia:</label><br>
+                <input class="form-control inputSize" id="linkWikipedia" name="linkWikipedia" 
+                [(ngModel)]="existingWord.linkWikipedia" #linkWikipedia='ngModel'>
+              
+                <label class="spaceBetween" style="font-weight: bold;" [for]="linkYouTube">Link (URL), YouTube:</label><br>
+                <input class="form-control inputSize" id="linkYouTube" name="linkYouTube" 
+                [(ngModel)]="existingWord.linkYouTube" #linkYouTube='ngModel'>
+                <div>
+                <button class="btn btn-primary spaceBetween buttonSpace" type="ngSubmit" 
+                [disabled]="!f.form.valid">Add Term</button>
+                <button class="btn btn-outline-dark spaceBetween"  (click)="goBack()">Back to list</button>  
+              </div>
+              </form>
+        </div>
+      </div>
+</div>

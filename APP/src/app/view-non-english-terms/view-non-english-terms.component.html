@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+       <h3 class="form-inline">
+           List of Terms in Different Languages - search for... 
+            <input class="form-control"
+                name="searchText" placeholder="(3 or more characters)" type="search">
+            &nbsp;&nbsp;
+            <button class="btn btn-primary" routerlink='/addNonEnglishTerm'>Add new</button>
+        </h3>
+    </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Word</th>
+              <th>English Translation</th>
+              <th>Author</th>
+              <th>Definition</th>
+              <th class="col-md-2">Field of study</th>
+              <th class="col-md-1"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let term of iModel">
+              <td *ngIf="term.definitions" class="col-md-2">{{ term.wordNonEnglish }}</td>
+              <td *ngIf="term.definitions" class="col-md-2">{{ term.wordEnglish }}</td>
+              <td *ngIf="term.definitions" class="col-md-1">{{ term.authorName }}</td>
+              <td *ngIf="term.definitions" class="col-md-5">
+                {{ term.definitions[0].definition }}
+                <span *ngIf="term.definitions.length - 1 > 0">
+                  <br>
+                  <i>• {{ term.definitions.length - 1 }} other definition(s)</i>
+                </span>
+              </td>
+              <td *ngIf="term.definitions">{{ term.fieldOfStudy }}</td>
+              <button class="btn btn-default" routerLink="/viewNonEnglishDetail/{{term._id}}">Detail</button>
+            </tr>
+          </tbody>
+        </table>
+  </div>
